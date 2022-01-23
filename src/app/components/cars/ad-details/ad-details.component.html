@@ -1,0 +1,37 @@
+<div class="container w-75">
+  <div class="row space-top">
+    <div class="col-md-12 mt-4">
+      <h1>Car Details</h1>
+    </div>
+  </div>
+  <div class="row space-top d-flex">
+      <div class="col-md-9 text-left">
+        <h3>{{ad.make}} {{ad.model}}</h3>
+        <h4>{{ad.year}}</h4>
+      </div>
+      <div class="col-md-3 text-right">
+        <h4>{{ad.price}} BGN</h4>
+      </div>
+  </div>
+  <div class="row">
+    <img src="{{ad.image}}" />
+  </div>
+  <div class="row d-flex justify-content-between">
+    <a [routerLink]="['/cars/edit', ad.id]" class="btn btn-secondary btn-md">Edit</a>
+    <a class="btn bg-danger" (click)="deleteAd(ad.id)">Delete</a>
+  </div>
+  <div class="row space-top text-left mt-2">
+    <div class="col-md-7">
+      <div>First Registration: {{ad.year}}</div>
+      <div>Mileage: {{ad.mileage}}</div>
+      <div>Fuel: {{ad.fuelType}}</div>
+    </div>
+    <div class="col-md-5 text-right">
+      <p>Location: {{ad.town}}</p>
+      <p>Phone: {{ad.phoneNumber}}</p>
+    </div>
+  </div>
+  <div class="row space-top text-left">
+    <p>Description: {{ad.description}}</p>
+  </div>
+</div>

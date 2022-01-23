@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "my-car-5a5cc": {
+      "hosting": {
+        "cars": [
+          "my-car-5a5cc"
+        ]
+      }
+    }
+  }
+}

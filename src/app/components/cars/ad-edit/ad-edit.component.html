@@ -1,0 +1,113 @@
+<form [formGroup]="adForm" (ngSubmit)="submitAd()">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputMake">Make</label>
+      <input formControlName="make" class="form-control" id="inputMake" placeholder="Make" type="text">
+      <small class="form-text text-danger" *ngIf="f.make.touched && f.make.errors?.required">
+        This field is required
+      </small>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="f.make.errors?.minlength">
+      Length must be at least {{f.make.errors.minlength.requiredLength}} chars!
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputModel">Model</label>
+      <input formControlName="model" class="form-control" id="inputModel" placeholder="Model" type="text">
+      <small class="form-text text-danger" *ngIf="f.model.touched && f.model.errors?.required">
+        This field is required
+      </small>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputYear">Year</label>
+      <input formControlName="year" class="form-control" id="inputYear" placeholder="First registration" type="number">
+      <small class="form-text text-danger" *ngIf="f.year.touched && f.year.errors?.required">
+        This field is required
+      </small>
+      <small class="alert alert-danger" *ngIf="f.year.errors?.min">
+        Year must start from {{f.year.errors?.min.min}}
+      </small>
+      <small class="alert alert-danger" *ngIf="f.year.errors?.max">
+        Year could not be in the future
+      </small>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputMileage">Mileage</label>
+      <input formControlName="mileage" class="form-control" id="inputMileage" placeholder="Mileage" type="number">
+    </div>
+    <div class="alert alert-danger" *ngIf="f.mileage.touched && f.mileage.errors?.required">
+      This field is required
+    </div>
+    <div class="alert alert-danger" *ngIf="f.mileage.errors?.min">
+      Mileage could not be negative
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputPrice">Price</label>
+      <input formControlName="price" class="form-control" id="inputPrice" placeholder="Price" type="number">
+    </div>
+    <div class="alert alert-danger" *ngIf="f.price.touched && f.price.errors?.required">
+      This field is required
+    </div>
+    <div class="alert alert-danger" *ngIf="f.price.errors?.min">
+      Price could not be negative
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputFuel">Fuel type</label>
+      <select formControlName="fuelType" id="inputFuel" class="form-control">
+        <option selected>Select fuel type...</option>
+        <option value="Gasoline">Gasoline</option>
+        <option value="Diesel">Diesel</option>
+        <option value="LPG">LPG</option>
+        <option value="CNG">CNG</option>
+        <option value="Electric">Electric</option>
+        <option value="Electric/Gasoline">Electric/Gasoline</option>
+        <option value="Electric/Diesel">Electric/Diesel</option>
+      </select>
+    </div>
+    <div class="alert alert-danger" *ngIf="f.fuelType.touched && f.fuelType.errors?.required">
+      This field is required
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputImage">Image</label>
+      <input formControlName="image" type="text" class="form-control" id="inputImage" placeholder="Image url">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputTown">Town</label>
+      <input formControlName="town" type="text" class="form-control" id="inputTown" placeholder="Location">
+    </div>
+    <div class="alert alert-danger" *ngIf="f.town.touched && f.town.errors?.required">
+      This field is required
+    </div>
+    <div class="alert alert-danger" *ngIf="f.town.errors?.minlength">
+      Length must be at least {{f.town.errors.minlength.requiredLength}} chars!
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputPhone">Phone number</label>
+      <input formControlName="phoneNumber" type="text" class="form-control" id="inputPhone" placeholder="Phone number">
+    </div>
+    <div class="alert alert-danger" *ngIf="f.phoneNumber.touched && f.phoneNumber.errors?.required">
+      This field is required
+    </div>
+    <div class="alert alert-danger" *ngIf="f.phoneNumber.errors?.minlength">
+      Length must be at least {{f.phoneNumber.errors.minlength.requiredLength}} chars!
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputDescription">Description</label>
+    <textarea formControlName="description" class="form-control" id="inputDescription" rows="5"
+              placeholder="Please add short description"></textarea>
+  </div>
+  <div class="alert alert-danger" *ngIf="f.description.touched && f.description.errors?.required">
+    This field is required
+  </div>
+  <div class="alert alert-danger" *ngIf="f.description.errors?.minlength">
+    Length must be at least {{f.description.errors.minlength.requiredLength}} chars!
+  </div>
+  <!--  <button type="submit" class="btn btn-primary">Submit</button>-->
+  <button [disabled]="adForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+</form>
+

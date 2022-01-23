@@ -1,0 +1,21 @@
+<header class="masthead">
+  <div class="inner">
+    <a class="masthead-brand" routerLink="/">My car
+    <img class="img-logo" src="../../../../assets/white-car.png" alt="">
+    </a>
+    <nav class="nav nav-masthead justify-content-center">
+      <ng-template [ngIf]="!isAuth">
+        <a class="nav-link active" routerLink="/signin">Sign in</a>
+        <a class="nav-link" routerLink="/signup">Signup</a>
+      </ng-template>
+      <ng-template [ngIf]="isAuth">
+        <a class="nav-link" routerLink="/cars/list">Buy</a>
+        <a class="nav-link" routerLink="/cars/create">Sell</a>
+        <a class="nav-link" routerLink="/signup">My Watchlist</a>
+        <a class="nav-link" routerLink="/cars/my">My ads</a>
+        <a (click)="logout()" class="nav-link" >Logout</a>
+      </ng-template>
+
+    </nav>
+  </div>
+</header>

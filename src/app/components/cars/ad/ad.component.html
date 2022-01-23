@@ -1,0 +1,27 @@
+<div class="card bg-light mb-4" style="width: 15rem; height: 20rem">
+  <img src="{{ad.image}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col">
+          <h6 class="card-title">{{ad.make}} {{ad.model}}</h6>
+        </div>
+        <div class="col">
+          <h6 class="card-title">{{ad.price}} BGN</h6>
+        </div>
+      </div>
+      <div class="row align-items-start">
+        <div class="col">
+          <p class="card-text">{{ad.year}}</p>
+        </div>
+        <div class="col">
+          <p class="card-text">{{ad.mileage}}km</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <a [routerLink]="['/cars/details', ad.id]" class="btn btn-secondary btn-md">Full Details</a>
+    <i class="far fa-star text-secondary" *ngIf="ad.ownerId != userId">Add to list</i>
+  </div>
+</div>
