@@ -7,4 +7,5 @@ export interface ListAd {
   mileage: number;
   price: number;
   ownerId: string;
+  isWatched: boolean;
 }

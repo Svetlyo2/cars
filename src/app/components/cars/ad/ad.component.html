@@ -22,6 +22,10 @@
   </div>
   <div class="card-body">
     <a [routerLink]="['/cars/details', ad.id]" class="btn btn-secondary btn-md">Full Details</a>
-    <i class="far fa-star text-secondary" *ngIf="ad.ownerId != userId">Add to list</i>
+    <ng-template [ngIf]="ad.ownerId != userId">
+      <i (click)="watch()" class="far fa-star text-secondary ml-4" *ngIf="!ad.isWatched"></i>
+      <i (click)="watchNot()" class="fas fa-star text-secondary ml-4" *ngIf="ad.isWatched"></i>
+    </ng-template>
+
   </div>
 </div>

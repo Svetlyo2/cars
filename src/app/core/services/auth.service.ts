@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
+    private toastr: ToastrService,
   ) { }
   initializeAuthState(){
     this.afAuth.authState.subscribe((userData) => {
@@ -38,27 +40,32 @@ export class AuthService {
     this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((data) => {
         // console.log(data);
+        this.toastr.success('Sign up successful!');
         this.router.navigate(['/login']);
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
+        this.toastr.error(err.message);
       });
   }
   signin(email: string, password: string) {
     this.afAuth.signInWithEmailAndPassword(email, password)
       .then((data) => {
+        this.toastr.success('Login Successful!');
         // console.log(data);
         this.router.navigate(['cars/list']);
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
+        this.toastr.error(err.message);
       });
   }
   logout(){
     this.afAuth.signOut()
       .then(r => {
         this.router.navigate(['/']);
-        // Sign-out successful.
+        this.toastr.info('Logged out!');
+        localStorage.clear();
       });
   }
 }
