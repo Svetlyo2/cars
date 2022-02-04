@@ -9,11 +9,18 @@ import { AdDetailsComponent } from './ad-details/ad-details.component';
 import {RouterModule} from '@angular/router';
 import { MyAdsComponent } from './my-ads/my-ads.component';
 import { AdEditComponent } from './ad-edit/ad-edit.component';
+import { MyWatchlistComponent } from './ad/my-watchlist/my-watchlist.component';
 
 
 
 @NgModule({
-  declarations: [AdCreateComponent, AdListComponent, AdComponent, AdDetailsComponent, MyAdsComponent, AdEditComponent],
+  declarations: [AdCreateComponent,
+    AdListComponent,
+    AdComponent,
+    AdDetailsComponent,
+    MyAdsComponent,
+    AdEditComponent,
+    MyWatchlistComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
