@@ -10,6 +10,7 @@ import {RouterModule} from '@angular/router';
 import { MyAdsComponent } from './my-ads/my-ads.component';
 import { AdEditComponent } from './ad-edit/ad-edit.component';
 import { MyWatchlistComponent } from './my-watchlist/my-watchlist.component';
+import {AuthGuardService as AuthGuard} from '../../core/guards/auth-guard.service';
 
 
 
@@ -24,7 +25,14 @@ import { MyWatchlistComponent } from './my-watchlist/my-watchlist.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule,
+    RouterModule.forChild([
+      { path: 'create', component: AdCreateComponent},
+      { path: 'list', component: AdListComponent},
+      { path: 'my', component: MyAdsComponent},
+      { path: 'watchlist', component: MyWatchlistComponent},
+      { path: 'details/:id', component: AdDetailsComponent},
+      { path: 'edit/:id', component: AdEditComponent},
+    ]),
   ],
   providers: [
     AdService,
