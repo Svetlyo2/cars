@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AdService} from '../../../core/services/ad.service';
-import {AuthService} from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-my-ads',
@@ -11,15 +10,15 @@ export class MyAdsComponent implements OnInit {
 
   ads;
 
-  constructor(private adService: AdService, private authService: AuthService) {
+  constructor(private adService: AdService) {
   }
 
   ngOnInit(): void {
-    this.getMyAds(this.authService.getCurrentUserId());
+    this.getMyAds();
   }
 
-  getMyAds(ownerId: string) {
-    this.adService.getMyAds(ownerId);
+  getMyAds(): void {
+    this.adService.getMyAds();
     this.adService.myAdsChanged
       .subscribe((res) => {
         this.ads = res;

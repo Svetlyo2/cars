@@ -11,6 +11,8 @@ import { MyAdsComponent } from './my-ads/my-ads.component';
 import { AdEditComponent } from './ad-edit/ad-edit.component';
 import { MyWatchlistComponent } from './my-watchlist/my-watchlist.component';
 import {AuthGuardService as AuthGuard} from '../../core/guards/auth-guard.service';
+import {DetailsResolver} from '../../core/services/resolvers/details.resolver';
+import {resolve} from '@angular/compiler-cli/src/ngtsc/file_system';
 
 
 
@@ -29,8 +31,9 @@ import {AuthGuardService as AuthGuard} from '../../core/guards/auth-guard.servic
       { path: 'create', component: AdCreateComponent},
       { path: 'list', component: AdListComponent},
       { path: 'my', component: MyAdsComponent},
+      // { path: 'watchlist', component: MyWatchlistComponent, resolve: {watchList: DetailsResolver}},
       { path: 'watchlist', component: MyWatchlistComponent},
-      { path: 'details/:id', component: AdDetailsComponent},
+      { path: 'details/:id', component: AdDetailsComponent, resolve: {ad: DetailsResolver}},
       { path: 'edit/:id', component: AdEditComponent},
     ]),
   ],

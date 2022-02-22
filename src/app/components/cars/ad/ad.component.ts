@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ListAd} from '../../../core/models/list-ad';
-import {AuthService} from '../../../core/services/auth.service';
 import {AdService} from '../../../core/services/ad.service';
 
 @Component({
@@ -12,17 +11,24 @@ export class AdComponent implements OnInit {
   @Input() ad: ListAd;
   userId: string;
 
-  constructor(private authService: AuthService, private adServise: AdService) { }
+  constructor(private adServise: AdService) {
+  }
 
   ngOnInit(): void {
-    this.userId =  this.authService.getCurrentUserId();
+    this.userId = localStorage.getItem('userId');
   }
-  watch(){
-  this.adServise.watch(this.ad.id);
-  this.ad.isWatched = true;
+
+  changeWatch() {
+    this.adServise.changeWatch(this.ad.id);
   }
-  watchNot(){
-    this.adServise.watchNot(this.ad.id);
-    this.ad.isWatched = false;
-  }
+
+  // watch() {
+  //   this.adServise.watch(this.ad.id);
+  //   // this.ad.isWatched = true;
+  // }
+  //
+  // watchNot() {
+  //   this.adServise.watchNot(this.ad.id);
+  //   // this.ad.isWatched = false;
+  // }
 }

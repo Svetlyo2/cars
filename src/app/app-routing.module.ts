@@ -10,13 +10,17 @@ import {MyAdsComponent} from './components/cars/my-ads/my-ads.component';
 import {AdEditComponent} from './components/cars/ad-edit/ad-edit.component';
 import {MyWatchlistComponent} from './components/cars/my-watchlist/my-watchlist.component';
 import {AuthGuardService as AuthGuard} from './core/guards/auth-guard.service';
+import {DetailsResolver} from './core/services/resolvers/details.resolver';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent},
   { path: 'home', component: HomeComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'cars', loadChildren: './components/cars/cars.module#CarsModule', canActivate: [AuthGuard] },
+  { path: 'cars', loadChildren: './components/cars/cars.module#CarsModule',
+    // resolve: {watchList: DetailsResolver},
+    // canActivate: [AuthGuard],
+  },
   // { path: 'cars/create', component: AdCreateComponent },
   // { path: 'cars/list', component: AdListComponent },
   // { path: 'cars/my', component: MyAdsComponent },

@@ -19,6 +19,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {ResponseHandlerInterceptorService} from './core/services/response-handler-interceptor.service';
 import {ToastrModule} from 'ngx-toastr';
+import {DetailsResolver} from './core/services/resolvers/details.resolver';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {ToastrModule} from 'ngx-toastr';
   providers: [AdService,
     AngularFireAuth,
     { provide: HTTP_INTERCEPTORS, useClass: ResponseHandlerInterceptorService, multi: true},
+    DetailsResolver,
   ],
   bootstrap: [AppComponent]
 })

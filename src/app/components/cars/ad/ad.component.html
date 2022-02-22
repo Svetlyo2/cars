@@ -1,4 +1,4 @@
-<div class="card bg-light mb-4" style="width: 15rem; height: 20rem">
+<div class="card bg-light mb-4" style="width: 16rem; height: 20rem">
   <img src="{{ad.image}}" class="card-img-top" alt="...">
   <div class="card-body">
     <div class="container">
@@ -23,8 +23,8 @@
   <div class="card-body">
     <a [routerLink]="['/cars/details', ad.id]" class="btn btn-secondary btn-md">Full Details</a>
     <ng-template [ngIf]="ad.ownerId != userId">
-      <i (click)="watch()" class="far fa-star text-secondary ml-4" *ngIf="!ad.isWatched"></i>
-      <i (click)="watchNot()" class="fas fa-star text-secondary ml-4" *ngIf="ad.isWatched"></i>
+      <i (click)="changeWatch()" class="far fa-star text-secondary ml-4" *ngIf="!ad.isWatched"></i>
+      <i (click)="changeWatch()" class="fas fa-star text-secondary ml-4" *ngIf="ad.isWatched"></i>
     </ng-template>
 
   </div>

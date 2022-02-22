@@ -14,15 +14,18 @@ export class AdDetailsComponent implements OnInit {
   constructor(private adService: AdService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(data => {
-      const id = data['id'];
-      // console.log(id);
-      this.adService.getAd(id)
-        .subscribe((d) => {
-          this.ad = d;
-        });
-      // console.log(this.ad);
-    });
+    this.route.data.subscribe( (data) => {
+      // console.log('from details ', data.ad);
+      this.ad = data.ad;
+      }
+    );
+    // this.route.params.subscribe(data => {
+    //   const id = data['id'];
+    //   this.adService.getAd(id)
+    //     .subscribe((d) => {
+    //       this.ad = d;
+    //     });
+    // });
   }
 
   deleteAd(id: string) {
