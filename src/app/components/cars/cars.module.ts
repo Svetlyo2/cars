@@ -13,6 +13,7 @@ import { MyWatchlistComponent } from './my-watchlist/my-watchlist.component';
 import {AuthGuardService as AuthGuard} from '../../core/guards/auth-guard.service';
 import {DetailsResolver} from '../../core/services/resolvers/details.resolver';
 import {resolve} from '@angular/compiler-cli/src/ngtsc/file_system';
+import { UploadListComponent } from './upload-list/upload-list.component';
 
 
 
@@ -23,7 +24,8 @@ import {resolve} from '@angular/compiler-cli/src/ngtsc/file_system';
     AdDetailsComponent,
     MyAdsComponent,
     AdEditComponent,
-    MyWatchlistComponent],
+    MyWatchlistComponent,
+    UploadListComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

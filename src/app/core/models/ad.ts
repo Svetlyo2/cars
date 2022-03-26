@@ -12,4 +12,5 @@ export interface Ad {
   town: string;
   phoneNumber: string;
   ownerId: string;
+  uploads: any[];
 }

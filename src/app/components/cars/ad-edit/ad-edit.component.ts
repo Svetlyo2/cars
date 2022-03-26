@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AdService} from '../../../core/services/ad.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FileUploadService} from '../../../core/services/file-upload.service';
+import {FileUpload} from '../../../core/models/file-upload';
+import {ToastrService} from 'ngx-toastr';
 
 const currentYear = new Date().getFullYear();
+
 @Component({
   selector: 'app-ad-edit',
   templateUrl: './ad-edit.component.html',
@@ -14,11 +18,19 @@ export class AdEditComponent implements OnInit {
   editLink: string;
   ad: any;
   isAdLoaded = false;
+  selectedFiles?: FileList;
+  currentFileUpload?: FileUpload;
+  percentage = 0;
+  fileUploads: any[];
+  private deleteList: string[] = [];
 
   constructor(private fb: FormBuilder,
               private adService: AdService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private uploadService: FileUploadService,
+              private router: Router,
+              private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.adForm = this.fb.group({
@@ -47,26 +59,72 @@ export class AdEditComponent implements OnInit {
         this.adForm.controls.town.setValue(data.town);
         this.adForm.controls.phoneNumber.setValue(data.phoneNumber);
         this.adForm.controls.description.setValue(data.description);
+        // console.log(data.uploads);
+        this.uploadService.uploads = data.uploads;
+        this.fileUploads = this.uploadService.uploads;
       });
   }
 
-  get f(){
+  get f() {
     return this.adForm.controls;
   }
 
-  submitAd(){
-    const obj = {...this.ad, ...{make: this.f.make.value,
+  selectFile(event: any): void {
+    if (this.fileUploads.length >= 5) {
+      this.toastr.info('You can upload up to 5 images');
+      return;
+    }
+    this.selectedFiles = event.target.files;
+  }
+
+  upload(): void {
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+      this.selectedFiles = undefined;
+      if (file) {
+        this.currentFileUpload = new FileUpload(file);
+        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+          percentage => {
+            this.percentage = Math.round(percentage ? percentage : 0);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+    }
+  }
+
+  removeImage(fileName: string): void {
+    this.deleteList.push(fileName);
+    this.uploadService.deleteFile(fileName);
+    this.fileUploads = this.uploadService.uploads;
+  }
+
+  deleteFileUpload(fileName: string): void {
+    this.uploadService.deleteFileStorage(fileName);
+  }
+
+  submitAd() {
+    const obj = {
+      ...this.ad, ...{
+        make: this.f.make.value,
         model: this.f.model.value,
         year: this.f.year.value,
         mileage: this.f.mileage.value,
         price: this.f.price.value,
         fuelType: this.f.fuelType.value,
-        image: this.f.image.value,
+        image: this.fileUploads[0]['url'],
         town: this.f.town.value,
         phoneNumber: this.f.phoneNumber.value,
-        description: this.f.description.value}
+        description: this.f.description.value
+      },
+      uploads: this.fileUploads
     };
-
+    if (this.deleteList.length > 0) {
+      this.deleteList.forEach((x) => this.deleteFileUpload(x));
+    }
+    this.deleteList = [];
     this.adService.editAd(obj, this.route.snapshot.params.id)
       .then((data) => {
         this.router.navigate(['cars/details', this.route.snapshot.params.id]);
@@ -74,5 +132,19 @@ export class AdEditComponent implements OnInit {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  close(): void {
+    if (this.deleteList.length > 0) {
+      this.deleteList.forEach((x) => this.deleteFileUpload(x));
+    }
+    this.deleteList = [];
+    if (this.uploadService.addedFiles.length > 0) {
+      this.uploadService.addedFiles.forEach((x) => this.deleteFileUpload(x));
+    }
+    this.uploadService.addedFiles = [];
+    this.uploadService.uploads = [];
+    this.fileUploads = [];
+    this.router.navigate(['/cars/details/' + this.route.snapshot.params.id]);
   }
 }

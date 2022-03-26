@@ -30,7 +30,6 @@ export class MyWatchlistComponent implements OnInit {
         return ads$;
       }), switchMap(arr => {
         arr.forEach(e => e['isWatched'] = true);
-        // console.log(arr);
         return [arr];
         })
         );

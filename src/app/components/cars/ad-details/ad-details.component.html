@@ -1,4 +1,4 @@
-<div class="container w-75">
+<div class="container">
   <div class="row space-top">
     <div class="col-md-12 mt-4">
       <h1>Car Details</h1>
@@ -9,29 +9,32 @@
         <h3>{{ad.make}} {{ad.model}}</h3>
         <h4>{{ad.year}}</h4>
       </div>
-      <div class="col-md-3 text-right">
-        <h4>{{ad.price}} BGN</h4>
+      <div class="col-md-3">
+        <h4 class="text-right">{{ad.price}} BGN</h4>
       </div>
   </div>
-  <div class="row">
+  <div class="row justify-content-center">
     <img src="{{ad.image}}" />
   </div>
-  <div class="row d-flex justify-content-between">
-    <a [routerLink]="['/cars/edit', ad.id]" class="btn btn-secondary btn-md">Edit</a>
-    <a class="btn bg-danger" (click)="deleteAd(ad.id)">Delete</a>
+    <app-upload-list [fileUploads]="fileUploads" (newItemEvent)="showImage($event)"></app-upload-list>
+  <div class="form-group d-flex justify-content-between mt-2">
+    <a [routerLink]="['/cars/edit', ad.id]" class="btn btn-secondary column col-3">Edit</a>
+    <a class="btn bg-danger column col-3" (click)="deleteAd(ad.id)">Delete</a>
   </div>
   <div class="row space-top text-left mt-2">
-    <div class="col-md-7">
+    <div class="col-md-6 ml-0">
       <div>First Registration: {{ad.year}}</div>
       <div>Mileage: {{ad.mileage}}</div>
       <div>Fuel: {{ad.fuelType}}</div>
     </div>
-    <div class="col-md-5 text-right">
+    <div class="col-md-6 text-right">
       <p>Location: {{ad.town}}</p>
       <p>Phone: {{ad.phoneNumber}}</p>
     </div>
   </div>
   <div class="row space-top text-left">
+    <div class="col-md-12 ml-0">
     <p>Description: {{ad.description}}</p>
+    </div>
   </div>
 </div>

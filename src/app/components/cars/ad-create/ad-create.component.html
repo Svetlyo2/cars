@@ -72,11 +72,30 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="form-group col-md-4">
-      <label for="inputImage">Image</label>
-      <input formControlName="image" type="text" class="form-control" id="inputImage" placeholder="Image url">
+    <div class="form-group col-md-6">
+<!--      <label for="inputImage">Image</label>-->
+<!--      <input formControlName="image" type="text" class="form-control" id="inputImage" placeholder="Image url">-->
+        <div class="d-flex justify-content-between pt-3 mt-3">
+          <label>
+            <input type="file" accept="image/*" class="text-nowrap text-truncate" (change)="selectFile($event)"/>
+          </label>
+          <button class="btn btn-success float-left" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+        </div>
+
+      <div *ngIf="currentFileUpload" class="progress mt-2">
+        <div
+          class="progress-bar progress-bar-info"
+          role="progressbar"
+          attr.aria-valuenow="{{ percentage }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [ngStyle]="{ width: percentage + '%' }"
+        >
+          {{ percentage }}%
+        </div>
+      </div>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
       <label for="inputTown">Town</label>
       <input formControlName="town" type="text" class="form-control" id="inputTown" placeholder="Location">
     </div>
@@ -86,7 +105,7 @@
     <div class="alert alert-danger" *ngIf="f.town.errors?.minlength">
       Length must be at least {{f.town.errors.minlength.requiredLength}} chars!
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
       <label for="inputPhone">Phone number</label>
       <input formControlName="phoneNumber" type="text" class="form-control" id="inputPhone" placeholder="Phone number">
     </div>
@@ -97,6 +116,13 @@
       Length must be at least {{f.phoneNumber.errors.minlength.requiredLength}} chars!
     </div>
   </div>
+    <app-upload-list [fileUploads]='fileUploads' (newItemEvent)="deleteFileUpload($event)"></app-upload-list>
+<!--  <div class="row">-->
+<!--      <div class="column" *ngFor="let file of fileUploads" style="position:relative">-->
+<!--        <a class="close icon-close" aria-label="Close"><span (click)="deleteFileUpload(file)" >&times;</span></a>-->
+<!--        <img class="img-thumbnail" src="{{ file.url }}" alt="No image available">-->
+<!--      </div>-->
+<!--  </div>-->
   <div class="form-group">
     <label for="inputDescription">Description</label>
     <textarea formControlName="description" class="form-control" id="inputDescription" rows="5"
@@ -108,6 +134,8 @@
   <div class="alert alert-danger" *ngIf="f.description.errors?.minlength">
     Length must be at least {{f.description.errors.minlength.requiredLength}} chars!
   </div>
-<!--  <button type="submit" class="btn btn-primary">Submit</button>-->
-    <button [disabled]="adForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+  <div class="form-group d-flex justify-content-between">
+    <button [disabled]="adForm.invalid" type="submit" class="btn btn-primary column col-2">Submit</button>
+    <a class="btn btn-secondary column col-2" (click)="closeCreate()">Close</a>
+  </div>
 </form>

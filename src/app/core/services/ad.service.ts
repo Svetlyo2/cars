@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, CollectionReference} from '@angular/fire/firestore';
-import {Observable, Subject, Subscription} from 'rxjs';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable, Subject} from 'rxjs';
 import {Ad} from '../models/ad';
 import {ListAd} from '../models/list-ad';
 import {CreateAd} from '../models/create-ad';
-import {concatMap, map, switchMap, tap} from 'rxjs/operators';
-import {AuthService} from './auth.service';
+import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 
@@ -14,30 +13,19 @@ const useId: string = localStorage.getItem('userId');
   providedIn: 'root'
 })
 export class AdService {
-  // private _ad: Ad;
-  // private adCollection: CollectionReference<ListAd>;
-  // private _watchlist: string[];
-  // private _watchlist: string[] = [];
-  // private _allAds: ListAd[] = [];
   private _myAds: ListAd[] = [];
   myAdsChanged = new Subject<ListAd[]>();
-  // private _watchedAds: ListAd[] = [];
-  // allAdsChanged = new Subject<ListAd[]>();
-  // watchlistChanged = new Subject<string[]>();
-  // watchedAdsChanged = new Subject<ListAd[]>();
 
   constructor(private afDb: AngularFirestore,
-              // private authService: AuthService,
               private router: Router,
               private toastr: ToastrService) {
-    // this.adCollection = afDb.collection<ListAd>('cars').ref;
   }
 
-  createAd(data: CreateAd): void {
+  createAd(data: CreateAd): any {
     this.afDb.collection<CreateAd>('cars').add(data)
       .then((docRef) => {
         this.toastr.success('Your add was published!');
-        // return docRef.id; TO CHECK
+        // console.log('from create ', docRef.id);
       })
       .catch((err) => {
         console.log(err);
@@ -45,20 +33,6 @@ export class AdService {
       });
   }
 
-  // getAllAds2() {
-  //   this.afDb.collection<ListAd>('cars')
-  //     .valueChanges({idField: 'id'})
-  //     .subscribe((res) => {
-  //       this._allAds = res;
-  //       this.allAdsChanged.next([...this._allAds]);
-  //     });
-  // }
-  // this.afDb.collection<Ad>('cars')
-  //   .snapshotChanges()
-  //   .subscribe((data) => {
-  //     this._ads = data;
-  //     console.log(data);
-  //   });
   getAllAds(): Observable<ListAd[]> {
     return this.afDb.collection<ListAd>('cars')
       .valueChanges({idField: 'id'});
@@ -73,18 +47,6 @@ export class AdService {
         this.myAdsChanged.next([...this._myAds]);
       });
   }
-
-  // getWatchlistIds() {
-  //   this._watchlist = [];
-  //   this.afDb.collection('watchlist', (ref) => ref.where('userId', '==', useId))
-  //   .valueChanges()
-  //     .subscribe((res) => {
-  //       res.forEach((x) => {
-  //        this._watchlist.push(x['adId']);
-  //       });
-  //       this.watchlistChanged.next([...this._watchlist]);
-  //     });
-  // }
 
   getNewWatchlist(): Observable<any> {
     return this.afDb.collection('watchlist',

@@ -1,0 +1,35 @@
+.column {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  max-width: 150px;
+  opacity: 0.8;
+  /*cursor: pointer;*/
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container (positioning is needed to position the close button and the text) */
+.container {
+  position: relative;
+  display: none;
+}
+.icon-close {
+  right:20px;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+}

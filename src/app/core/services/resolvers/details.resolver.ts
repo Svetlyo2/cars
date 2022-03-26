@@ -17,7 +17,6 @@ export class DetailsResolver implements Resolve<string []> {
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<string[]> {
     const id = route.params['id'];
-    console.log('from resolver', id);
     return this.adService.getAd(id).pipe(first());
   }
 }

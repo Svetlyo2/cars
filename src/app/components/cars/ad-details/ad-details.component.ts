@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdService} from '../../../core/services/ad.service';
 import {Ad} from '../../../core/models/ad';
 import {ActivatedRoute} from '@angular/router';
+import {FileUpload} from '../../../core/models/file-upload';
 
 @Component({
   selector: 'app-ad-details',
@@ -10,13 +11,14 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AdDetailsComponent implements OnInit {
   ad: Ad;
+  fileUploads: FileUpload[];
 
   constructor(private adService: AdService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.data.subscribe( (data) => {
-      // console.log('from details ', data.ad);
       this.ad = data.ad;
+      this.fileUploads = this.ad.uploads;
       }
     );
     // this.route.params.subscribe(data => {
@@ -30,5 +32,9 @@ export class AdDetailsComponent implements OnInit {
 
   deleteAd(id: string) {
     this.adService.deleteAdById(id);
+  }
+  showImage(url: string) {
+    // console.log(url);
+    this.ad.image = url;
   }
 }
