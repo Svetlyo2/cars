@@ -1,3 +1,6 @@
+import firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
+
 export interface Ad {
   id: string;
   make: string;
@@ -6,11 +9,12 @@ export interface Ad {
   mileage: number;
   price: number;
   fuelType: string;
-  createdOn: Date;
+  createdOn: Timestamp;
   description: string;
   image: string;
   town: string;
   phoneNumber: string;
   ownerId: string;
   uploads: any[];
+  isWatched: boolean;
 }

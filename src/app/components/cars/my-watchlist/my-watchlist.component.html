@@ -1,8 +1,14 @@
-<div class="card-deck">
-  <ng-container *ngIf="ads$ | async; let ads">
-    <ng-container *ngFor="let ad of ads">
-      <app-ad [ad]="ad"></app-ad>
-    </ng-container>
+<h2>Cars in my watchlist</h2>
+<div class="card-deck justify-content-center mt-4">
+  <!--  <ng-container *ngIf="ads$ | async; let ads">-->
+<!--  <ng-container *ngFor="let ad of ads$ | async">-->
+<!--    <app-ad [ad]="ad" (newItemEvent)="checkAds()"></app-ad>-->
+<!--  </ng-container>-->
+  <ng-container *ngFor="let ad of ads">
+    <app-ad [ad]="ad" (newItemEvent)="changeWatch(ad.id)"></app-ad>
+  </ng-container>
+  <ng-container *ngIf="!haveAds">
+    <h4 class="mt-3">Your watchlist is empty</h4>
   </ng-container>
 
 </div>

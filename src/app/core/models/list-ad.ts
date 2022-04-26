@@ -1,3 +1,6 @@
+import firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
+
 export interface ListAd {
   id: string;
   make: string;
@@ -7,5 +10,6 @@ export interface ListAd {
   mileage: number;
   price: number;
   ownerId: string;
+  createdOn: Timestamp;
   isWatched: boolean;
 }

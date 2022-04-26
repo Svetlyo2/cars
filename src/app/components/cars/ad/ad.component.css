@@ -17,4 +17,16 @@
 .card-img-top{
   width: -moz-available;
   max-height: 60%;
+  height: 100%;
+  object-fit: cover;
+}
+.details{
+  position: absolute;
+  bottom: 5%;
+  left: 28%;
+}
+.icon-new {
+  position: absolute;
+  top: 0;
+  height: 35px;
 }

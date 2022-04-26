@@ -1,3 +1,4 @@
 .card-deck{
   justify-content: center;
+  min-height: 75%;
 }

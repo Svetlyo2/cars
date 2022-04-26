@@ -1,23 +1,27 @@
 <div class="container">
   <div class="row space-top">
-    <div class="col-md-12 mt-4">
-      <h1>Car Details</h1>
+    <div class="col-md-12 m-0">
+      <h2>Car Details</h2>
     </div>
   </div>
-  <div class="row space-top d-flex">
-      <div class="col-md-9 text-left">
-        <h3>{{ad.make}} {{ad.model}}</h3>
-        <h4>{{ad.year}}</h4>
+  <div class="row space-top d-flex justify-content-between">
+    <div class="text-left">
+        <h5>{{ad.make}} {{ad.model}}</h5>
+        <h6>{{ad.year}}</h6>
       </div>
-      <div class="col-md-3">
-        <h4 class="text-right">{{ad.price}} BGN</h4>
+      <div class="">
+        <h5 class="text-right">{{ad.price}} BGN</h5>
       </div>
   </div>
   <div class="row justify-content-center">
-    <img src="{{ad.image}}" />
+    <img src="{{ad.image}}" class="mw-80 ml-3"/>
+    <ng-template [ngIf]="ad.ownerId != userId" class="icon-watch">
+      <i (click)="changeWatch()" class="far fa-star ml-4 fa-3x text-dark text-outline" *ngIf="!ad.isWatched"></i>
+      <i (click)="changeWatch()" class="fas fa-star ml-4 fa-3x text-dark text-outline" *ngIf="ad.isWatched"></i>
+    </ng-template>
   </div>
     <app-upload-list [fileUploads]="fileUploads" (newItemEvent)="showImage($event)"></app-upload-list>
-  <div class="form-group d-flex justify-content-between mt-2">
+  <div *ngIf="userId == ad.ownerId" class="form-group d-flex justify-content-between mt-2">
     <a [routerLink]="['/cars/edit', ad.id]" class="btn btn-secondary column col-3">Edit</a>
     <a class="btn bg-danger column col-3" (click)="deleteAd(ad.id)">Delete</a>
   </div>
@@ -28,11 +32,12 @@
       <div>Fuel: {{ad.fuelType}}</div>
     </div>
     <div class="col-md-6 text-right">
-      <p>Location: {{ad.town}}</p>
-      <p>Phone: {{ad.phoneNumber}}</p>
+      <div>Location: {{ad.town}}</div>
+      <div>Phone: {{ad.phoneNumber}}</div>
+      <div>Posted: {{ad.createdOn.toDate() | date: 'dd/MM/yyyy'}}</div>
     </div>
   </div>
-  <div class="row space-top text-left">
+  <div class="row space-top text-left mt-3">
     <div class="col-md-12 ml-0">
     <p>Description: {{ad.description}}</p>
     </div>

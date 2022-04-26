@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 })
 
 export class UploadListComponent implements OnInit {
-  @Input() fileUploads: any[];
+  @Input() fileUploads = [];
   @Output() newItemEvent = new EventEmitter<string>();
   isDetails = false;
 

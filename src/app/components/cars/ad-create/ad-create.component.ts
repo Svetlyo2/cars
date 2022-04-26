@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 import {FileUploadService} from '../../../core/services/file-upload.service';
 import {FileUpload} from '../../../core/models/file-upload';
+import firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
 
 const currentYear = new Date().getFullYear();
 @Component({
@@ -17,7 +19,8 @@ export class AdCreateComponent implements OnInit {
   selectedFiles?: FileList;
   currentFileUpload?: FileUpload;
   percentage = 0;
-  fileUploads: any[];
+  // fileUploads: any[];
+  fileUploads = [];
   private isEdit = false;
 
   constructor(private fb: FormBuilder,
@@ -27,6 +30,8 @@ export class AdCreateComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.uploadService.uploads = [];
+    // console.log(this.fileUploads);
     this.adForm = this.fb.group({
       make: ['', [Validators.required, Validators.minLength(2)]],
       model: ['', [Validators.required]],
@@ -48,7 +53,9 @@ export class AdCreateComponent implements OnInit {
   publishAd(): void {
     const uploads = this.uploadService.uploads;
     const form = this.adForm.value;
-    form.createdOn = Date.now();
+    form.make = form.make.toUpperCase().trim();
+    form.model = form.model.toUpperCase().trim();
+    form.createdOn = Timestamp.now();
     form.ownerId = this.authService.getCurrentUserId();
     form.uploads = [];
     if (uploads.length > 0){
@@ -56,6 +63,7 @@ export class AdCreateComponent implements OnInit {
       for (let i = 0; i < uploads.length; i++) {
         form.uploads[i] = this.uploadService.uploads[i];
       }
+      // console.log('form ', form.uploads);
     }
     this.adService.createAd(form);
     this.router.navigate(['/cars/list']);
@@ -93,6 +101,7 @@ export class AdCreateComponent implements OnInit {
         .forEach((n) => this.uploadService.deleteFileStorage(n));
     }
     this.uploadService.uploads = [];
+    // this.fileUploads = [];
     this.router.navigate(['/cars/my']);
   }
 }

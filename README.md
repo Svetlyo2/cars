@@ -1,27 +1,39 @@
-# Cars
-
+# Angular project for SoftUni course
+Angular November 2020 / Retake Angular April 2022
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
-## Development server
+## Техническа информация
+### Структура на проекта:
+•	клиентската част, изпълнена с Angular, намира се в директория: Cars
+•	сървърна част, изпълнена чрез Firebase
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### База данни:
+Използвана е база данни Firebase Database в комбинация с Firebase Storage.
+Примерните данни са заредени в базата 
 
-## Code scaffolding
+## Стартиране на проекта
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Инсталиране чрез команда `ng serve`. Навигирайте към `http://localhost:4200/`.
 
-## Build
+## Описание на сайта:
+### Име на сайта: MyCar
+### Описание на сайта:
+Сайта за обяви за автомобили. Позволява преглед на обяви, публикувани от всички потребители, търсене по марка или марка и модел, добавянето на избрани обяви в собствен списък с наблюдавани обяви, публикуване на обяви от потребителите, техния преглед, редактиране и изтриване. Освен обичайната изисквана информация за марка, модел, цена и т.н. има възможност за добавяне на до 5 снимки към всяка обява. Добавянето на снимки е чрез прикачване на файл, който се запазва във Firebase Storage (а не  чрез въвеждане на адрес, на който е съхранена снимката). В обявата се показва превю на всички прикачени снимки и при клик върху превюто снимката се показва в по-голям формат.
+### Карта на сайта:
+За нелогнати потребители
+•	Начална (Home) страница
+•	Регистрация
+•	Вход
+За логнати потребители
+•	Начална (Home) страница
+•	Търсене (включва списък с всички публикувани обяви)
+•	Продай (форма за добавяне на нова обява за продажба на автомобил)
+•	Моя списък за наблюдение (показва всички обяви, които потребителят с добавил)
+•	Мои автомобили - показва публикуваните от потребителя обяви
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Права за създаване/редактиране/изтриване:
+Всички потребители са с еднакъв статут и могат да създават обяви, да редактират/изтриват само собствените си обяви.
+Всички потребители могат да разглеждат всички обяви, да ги добавят в собствен списък с наблючдавани обяви или да премахнат обяви от него. 
 
-## Running unit tests
+## Допълнителна информация:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AdCreateComponent } from './ad-create/ad-create.component';
 import { AdListComponent } from './ad-list/ad-list.component';
 import {AdService} from '../../core/services/ad.service';
@@ -26,19 +26,20 @@ import { UploadListComponent } from './upload-list/upload-list.component';
     AdEditComponent,
     MyWatchlistComponent,
     UploadListComponent],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule.forChild([
-      { path: 'create', component: AdCreateComponent},
-      { path: 'list', component: AdListComponent},
-      { path: 'my', component: MyAdsComponent},
-      // { path: 'watchlist', component: MyWatchlistComponent, resolve: {watchList: DetailsResolver}},
-      { path: 'watchlist', component: MyWatchlistComponent},
-      { path: 'details/:id', component: AdDetailsComponent, resolve: {ad: DetailsResolver}},
-      { path: 'edit/:id', component: AdEditComponent},
-    ]),
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        RouterModule.forChild([
+            {path: 'create', component: AdCreateComponent},
+            {path: 'list', component: AdListComponent},
+            {path: 'my', component: MyAdsComponent},
+            // { path: 'watchlist', component: MyWatchlistComponent, resolve: {watchList: DetailsResolver}},
+            {path: 'watchlist', component: MyWatchlistComponent},
+            {path: 'details/:id', component: AdDetailsComponent, resolve: {ad: DetailsResolver}},
+            {path: 'edit/:id', component: AdEditComponent},
+        ]),
+        FormsModule,
+    ],
   providers: [
     AdService,
   ]

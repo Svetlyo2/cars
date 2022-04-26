@@ -41,7 +41,7 @@ import {DetailsResolver} from './core/services/resolvers/details.resolver';
     SharedModule,
     CarsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({timeOut: 3000}),
   ],
   providers: [AdService,
     AngularFireAuth,

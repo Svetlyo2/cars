@@ -1,5 +1,9 @@
-<div class="card-deck">
+<h2>My ads for cars</h2>
+<div class="card-deck justify-content-center">
   <ng-container *ngFor="let ad of ads">
     <app-ad [ad]="ad"></app-ad>
+  </ng-container>
+  <ng-container *ngIf="!haveAds">
+    <h4 class="mt-3">You have no active ads at present</h4>
   </ng-container>
 </div>

@@ -5,7 +5,6 @@ import {FileUpload} from '../models/file-upload';
 import {Observable} from 'rxjs';
 import {finalize} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'

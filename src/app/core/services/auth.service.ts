@@ -40,7 +40,6 @@ export class AuthService {
   signUp(email: string, password: string) {
     this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((data) => {
-        // console.log(data);
         this.toastr.success('Sign up successful!');
         this.router.navigate(['/login']);
       })
@@ -61,17 +60,17 @@ export class AuthService {
         this.toastr.error(err.message);
       });
   }
-  logout(){
+  logout(): void{
     this.afAuth.signOut()
       .then(r => {
         this.router.navigate(['/']);
         this.toastr.info('Logged out!');
         // When using AuthGuard it's better to keep the local storage in order to allow page load
         // before receiving response from Firebase!
-        // localStorage.clear();
+        localStorage.clear();
       });
   }
-  isAuthenticated(){
+  isAuthenticated(): string{
     return localStorage.getItem('userId');
   }
 }

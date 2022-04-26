@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AdService} from '../../../core/services/ad.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FileUploadService} from '../../../core/services/file-upload.service';
 import {FileUpload} from '../../../core/models/file-upload';
 import {ToastrService} from 'ngx-toastr';
+import {Subscription} from 'rxjs';
 
 const currentYear = new Date().getFullYear();
 
@@ -13,7 +14,7 @@ const currentYear = new Date().getFullYear();
   templateUrl: './ad-edit.component.html',
   styleUrls: ['./ad-edit.component.css']
 })
-export class AdEditComponent implements OnInit {
+export class AdEditComponent implements OnInit, OnDestroy {
   adForm: FormGroup;
   editLink: string;
   ad: any;
@@ -23,6 +24,7 @@ export class AdEditComponent implements OnInit {
   percentage = 0;
   fileUploads: any[];
   private deleteList: string[] = [];
+  getAdSub: Subscription;
 
   constructor(private fb: FormBuilder,
               private adService: AdService,
@@ -45,7 +47,7 @@ export class AdEditComponent implements OnInit {
       phoneNumber: ['', [Validators.required, Validators.minLength(8)]],
       description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(600)]],
     });
-    this.adService.getAd(this.route.snapshot.params.id)
+    this.getAdSub = this.adService.getAd(this.route.snapshot.params.id)
       .subscribe((data) => {
         this.ad = data;
         this.editLink = '/cars/edit/' + this.route.snapshot.params.id;
@@ -59,10 +61,13 @@ export class AdEditComponent implements OnInit {
         this.adForm.controls.town.setValue(data.town);
         this.adForm.controls.phoneNumber.setValue(data.phoneNumber);
         this.adForm.controls.description.setValue(data.description);
-        // console.log(data.uploads);
         this.uploadService.uploads = data.uploads;
         this.fileUploads = this.uploadService.uploads;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.getAdSub.unsubscribe();
   }
 
   get f() {
@@ -108,8 +113,8 @@ export class AdEditComponent implements OnInit {
   submitAd() {
     const obj = {
       ...this.ad, ...{
-        make: this.f.make.value,
-        model: this.f.model.value,
+        make: this.f.make.value.toUpperCase(),
+        model: this.f.model.value.toUpperCase(),
         year: this.f.year.value,
         mileage: this.f.mileage.value,
         price: this.f.price.value,
@@ -125,6 +130,7 @@ export class AdEditComponent implements OnInit {
       this.deleteList.forEach((x) => this.deleteFileUpload(x));
     }
     this.deleteList = [];
+    this.fileUploads = [];
     this.adService.editAd(obj, this.route.snapshot.params.id)
       .then((data) => {
         this.router.navigate(['cars/details', this.route.snapshot.params.id]);

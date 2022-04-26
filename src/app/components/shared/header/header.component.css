@@ -2,7 +2,9 @@
  * Header
  */
 .masthead {
-  min-height: 4rem;
+  min-height: 3rem;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .masthead-brand {

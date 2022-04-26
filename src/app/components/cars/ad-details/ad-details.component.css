@@ -1,0 +1,21 @@
+.fa-star {
+  position: relative;
+  right: 11%;
+  align-self: end;
+  bottom: 10%;
+  margin-bottom: 2%;
+
+}
+.fa-star:hover {
+  cursor: pointer;
+}
+.container {
+  max-width: 85%;
+}
+
+.mw-80 {
+  max-width: 80%;
+}
+.text-outline {
+  -webkit-text-stroke: 1px white;
+}
