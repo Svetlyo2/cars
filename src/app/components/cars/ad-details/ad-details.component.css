@@ -10,12 +10,18 @@
   cursor: pointer;
 }
 .container {
-  max-width: 85%;
+  max-width: 70%;
 }
 
-.mw-80 {
-  max-width: 80%;
+.mw-img {
+  max-width: 70%;
 }
 .text-outline {
   -webkit-text-stroke: 1px white;
+}
+.ml-15 {
+  margin-left: 15%;
+}
+.mr-15 {
+  margin-right: 15%;
 }

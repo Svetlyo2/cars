@@ -1,8 +1,15 @@
 <header class="masthead">
   <div class="inner">
-    <a class="masthead-brand" routerLink="/">MyCar
-    <img class="img-logo" src="../../../../assets/white-car.png" alt="">
-    </a>
+    <ng-template [ngIf]="!isAuth">
+      <a class="masthead-brand" routerLink="/">MyCar
+        <img class="img-logo" src="../../../../assets/white-car.png" alt="">
+      </a>
+    </ng-template>
+    <ng-template [ngIf]="isAuth">
+      <a class="masthead-brand" routerLink="/cars/list">MyCar
+        <img class="img-logo" src="../../../../assets/white-car.png" alt="">
+      </a>
+    </ng-template>
     <nav class="nav nav-masthead justify-content-center">
       <ng-template [ngIf]="!isAuth">
         <a class="nav-link" routerLink="/signin">Sign in</a>

@@ -36,22 +36,22 @@
     <div class="form-group col-md-4">
       <label for="inputMileage">Mileage</label>
       <input formControlName="mileage" class="form-control" id="inputMileage" placeholder="Mileage" type="number">
-    </div>
-    <div class="alert alert-danger" *ngIf="f.mileage.touched && f.mileage.errors?.required">
+    <small class="form-text text-danger" *ngIf="f.mileage.touched && f.mileage.errors?.required">
       This field is required
-    </div>
-    <div class="alert alert-danger" *ngIf="f.mileage.errors?.min">
+    </small>
+    <small class="form-text text-danger" *ngIf="f.mileage.errors?.min">
       Mileage could not be negative
+    </small>
     </div>
     <div class="form-group col-md-4">
       <label for="inputPrice">Price</label>
       <input formControlName="price" class="form-control" id="inputPrice" placeholder="Price" type="number">
-    </div>
-    <div class="alert alert-danger" *ngIf="f.price.touched && f.price.errors?.required">
+    <small class="form-text text-danger" *ngIf="f.price.touched && f.price.errors?.required">
       This field is required
-    </div>
-    <div class="alert alert-danger" *ngIf="f.price.errors?.min">
+    </small>
+    <small class="form-text text-danger" *ngIf="f.price.errors?.min">
       Price could not be negative
+    </small>
     </div>
     <div class="form-group col-md-4">
       <label for="inputFuel">Fuel type</label>
@@ -65,9 +65,9 @@
         <option value="Electric/Gasoline">Electric/Gasoline</option>
         <option value="Electric/Diesel">Electric/Diesel</option>
       </select>
-    </div>
-    <div class="alert alert-danger" *ngIf="f.fuelType.touched && f.fuelType.errors?.required">
+    <small class="form-text text-danger" *ngIf="f.fuelType.touched && f.fuelType.errors?.required">
       This field is required
+    </small>
     </div>
   </div>
   <div class="form-row">
@@ -96,22 +96,22 @@
     <div class="form-group col-md-3">
       <label for="inputTown">Town</label>
       <input formControlName="town" type="text" class="form-control" id="inputTown" placeholder="Location">
-    </div>
-    <div class="alert alert-danger" *ngIf="f.town.touched && f.town.errors?.required">
+    <small class="form-text text-danger" *ngIf="f.town.touched && f.town.errors?.required">
       This field is required
-    </div>
-    <div class="alert alert-danger" *ngIf="f.town.errors?.minlength">
+    </small>
+    <small class="form-text text-danger" *ngIf="f.town.errors?.minlength">
       Length must be at least {{f.town.errors.minlength.requiredLength}} chars!
+    </small>
     </div>
     <div class="form-group col-md-3">
       <label for="inputPhone">Phone number</label>
       <input formControlName="phoneNumber" type="text" class="form-control" id="inputPhone" placeholder="Phone number">
-    </div>
-    <div class="alert alert-danger" *ngIf="f.phoneNumber.touched && f.phoneNumber.errors?.required">
+    <small class="form-text text-danger" *ngIf="f.phoneNumber.touched && f.phoneNumber.errors?.required">
       This field is required
-    </div>
-    <div class="alert alert-danger" *ngIf="f.phoneNumber.errors?.minlength">
+    </small>
+    <small class="form-text text-danger" *ngIf="f.phoneNumber.errors?.minlength">
       Length must be at least {{f.phoneNumber.errors.minlength.requiredLength}} chars!
+    </small>
     </div>
   </div>
   <app-upload-list [fileUploads]='fileUploads' (newItemEvent)="removeImage($event)"></app-upload-list>
@@ -119,12 +119,12 @@
     <label for="inputDescription">Description</label>
     <textarea formControlName="description" class="form-control" id="inputDescription" rows="5"
               placeholder="Please add short description"></textarea>
-  </div>
-  <div class="alert alert-danger" *ngIf="f.description.touched && f.description.errors?.required">
-    This field is required
-  </div>
-  <div class="alert alert-danger" *ngIf="f.description.errors?.minlength">
-    Length must be at least {{f.description.errors.minlength.requiredLength}} chars!
+    <small class="form-text text-danger" *ngIf="f.description.touched && f.description.errors?.required">
+      This field is required
+    </small>
+    <small class="form-text text-danger" *ngIf="f.description.errors?.minlength">
+      Length must be at least {{f.description.errors.minlength.requiredLength}} chars!
+    </small>
   </div>
   <div class="form-group d-flex justify-content-between">
     <!--  <button type="submit" class="btn btn-primary">Submit</button>-->

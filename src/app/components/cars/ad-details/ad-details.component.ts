@@ -31,21 +31,7 @@ export class AdDetailsComponent implements OnInit {
     }))
       .subscribe(res => {
         this.ad['isWatched'] = res.size > 0;
-        // console.log(this.ad);
       });
-    // this.route.data.subscribe( (data) => {
-    //   this.ad = data.ad;
-    //   console.log(data.ad);
-    //   this.fileUploads = this.ad.uploads;
-    //   }
-    // );
-    // this.route.params.subscribe(data => {
-    //   const id = data['id'];
-    //   this.adService.getAd(id)
-    //     .subscribe((d) => {
-    //       this.ad = d;
-    //     });
-    // });
   }
 
   changeWatch(): void {

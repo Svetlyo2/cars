@@ -28,7 +28,7 @@
   display: none;
 }
 .icon-close {
-  right:20px;
+  right:15%;
   position: absolute;
   z-index: 1;
   cursor: pointer;

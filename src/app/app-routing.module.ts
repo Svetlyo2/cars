@@ -18,15 +18,8 @@ const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'cars', loadChildren: './components/cars/cars.module#CarsModule',
-    // resolve: {watchList: DetailsResolver},
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
-  // { path: 'cars/create', component: AdCreateComponent },
-  // { path: 'cars/list', component: AdListComponent },
-  // { path: 'cars/my', component: MyAdsComponent },
-  // { path: 'cars/watchlist', component: MyWatchlistComponent },
-  // { path: 'cars/details/:id', component: AdDetailsComponent },
-  // { path: 'cars/edit/:id', component: AdEditComponent },
 ];
 
 @NgModule({

@@ -32,6 +32,10 @@ button:disabled{
   position: relative;
   display: none;
 }
+form {
+  margin-left: 10%;
+  margin-right: 10%;
+}
 /*.icon-close {*/
 /*  right:20px;*/
 /*  position: absolute;*/

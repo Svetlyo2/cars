@@ -3,7 +3,7 @@ import {AdService} from '../../../core/services/ad.service';
 import {ListAd} from '../../../core/models/list-ad';
 import {ActivatedRoute, Router} from '@angular/router';
 import {combineLatest, Observable} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-watchlist',
