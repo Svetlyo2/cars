@@ -8,7 +8,6 @@ import {ToastrService} from 'ngx-toastr';
   providedIn: 'root'
 })
 export class AuthService {
-  // tslint:disable-next-line:variable-name
   private _isAuth = false;
   private _userId = null;
   isAuthChanged = new Subject<boolean>();
@@ -41,7 +40,7 @@ export class AuthService {
     this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((data) => {
         this.toastr.success('Sign up successful!');
-        this.router.navigate(['cars/list']);
+        this.router.navigate(['/cars/list']);
       })
       .catch((err) => {
         // console.error(err);
@@ -51,9 +50,8 @@ export class AuthService {
   signin(email: string, password: string) {
     this.afAuth.signInWithEmailAndPassword(email, password)
       .then((data) => {
-        this.router.navigate(['cars/list']);
+        this.router.navigate(['/cars/list']);
         this.toastr.success('Login Successful!');
-        // console.log(data);
       })
       .catch((err) => {
         // console.error(err);
@@ -63,12 +61,11 @@ export class AuthService {
   logout(): void{
     this.afAuth.signOut()
       .then(r => {
-        this.router.navigate(['/']);
         this.toastr.info('Logged out!');
         // When using AuthGuard keeping the local storage allows page load
         // before receiving response from Firebase!
         localStorage.clear();
-        console.log(localStorage.getItem('userId'));
+        this.router.navigate(['/']);
       });
   }
   isAuthenticated(): string{

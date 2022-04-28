@@ -61,8 +61,6 @@ export class AdListComponent implements OnInit {
       this.all$ = this.watchlist$.pipe(map(w => {
         return {watchlist: w, adsList: filtered };
       }));
-      // this.ads$ = this.adService.getByMake(input[0].toUpperCase());
-      // this.combineLists();
     } else if (input.length === 2) {
       console.log(input);
       const filtered = this.notFiltered
@@ -73,8 +71,6 @@ export class AdListComponent implements OnInit {
       this.all$ = this.watchlist$.pipe(map(w => {
         return {watchlist: w, adsList: filtered };
       }));
-      // this.ads$ = this.adService.getByMakeAndModel(input[0], input[1]);
-      // this.combineLists();
     }
   }
   showAll(): void {

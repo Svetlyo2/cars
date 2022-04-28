@@ -31,7 +31,6 @@ export class AdCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.uploadService.uploads = [];
-    // console.log(this.fileUploads);
     this.adForm = this.fb.group({
       make: ['', [Validators.required, Validators.minLength(2)]],
       model: ['', [Validators.required]],
@@ -63,7 +62,6 @@ export class AdCreateComponent implements OnInit {
       for (let i = 0; i < uploads.length; i++) {
         form.uploads[i] = this.uploadService.uploads[i];
       }
-      // console.log('form ', form.uploads);
     }
     this.adService.createAd(form);
     this.router.navigate(['/cars/list']);

@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ListAd} from '../../../core/models/list-ad';
 import {AdService} from '../../../core/services/ad.service';
 import {Router} from '@angular/router';
-import {formatDate} from '@angular/common';
 
 const currentDate = new Date().getDate().toLocaleString();
 
@@ -28,7 +27,6 @@ export class AdComponent implements OnInit {
   }
 
   changeWatch(): void {
-    // this.adService.changeWatch(this.ad.id);
     this.newItemEvent.emit(this.ad.id);
   }
   calcDateDifference () {
@@ -37,6 +35,5 @@ export class AdComponent implements OnInit {
     if ((now.getDate() - created.getDate()) < 7) {
       this.isNew = true;
     }
-    // console.log('check', now.getDate() - created.getDate() );
   }
 }
