@@ -49,14 +49,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Допълнителна информация:
 
-###•	автентикация чрез Firebase Authentication
+•	автентикация чрез Firebase Authentication
 
-###•	използване на NGBootstrap за дизайн на потребителския интерфейс вкл. responsive design
+•	използване на NGBootstrap за дизайн на потребителския интерфейс вкл. responsive design
 
-###•	използване на  Firebase Storage за съхраняване на файлове (снимки)  на потребителя
+•	използване на  Firebase Storage за съхраняване на файлове (снимки)  на потребителя
 
-###•	актуализация на страниците чрез subscribe към заявки към realtime база данни (Firebase Database)
+•	актуализация на страниците чрез subscribe към заявки към realtime база данни (Firebase Database)
 
-###•	използване на оператори от библиотеката RxJS за получаване на данни чрез комплексни асинхронни заявки(map, switchMap, combineLatest, finalize)
+•	използване на оператори от библиотеката RxJS за получаване на данни чрез комплексни асинхронни заявки(map, switchMap, combineLatest, finalize)
 
-###•	споделяне на данни чрез Subject
+•	споделяне на данни чрез Subject
