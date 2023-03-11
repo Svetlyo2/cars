@@ -1,62 +1,59 @@
-# Angular project for SoftUni course
-Angular November 2020 / Retake Angular April 2022
+# Angular project for SoftUni course Angular April 2022
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
-## Техническа информация
-### Структура на проекта:
-•	клиентската част, изпълнена с Angular, намира се в директория: Cars
+## Application Overview
+This application was built with Angular that interacts with Firebase Database combined with Firebase Storage.
 
-•	сървърна част, изпълнена чрез Firebase
+## Getting started
+Make sure you have the Angular CLI installed globally.
+Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-### База данни:
-Използвана е база данни Firebase Database в комбинация с Firebase Storage.
-Примерните данни са заредени в базата 
+## Functionality overview
+The application is a site called "MyCar" that allows users to publish and read ads for cars. An anonymous user should be able to access the home, register and login page.
+A registered user can post, edit or delete his own ads.
 
-## Стартиране на проекта
+## The general page breakdown looks like this:
+### Anonymous users
 
-Инсталиране чрез команда `ng serve`. Навигирайте към `http://localhost:4200/`.
+•	Home page
 
-## Описание на сайта:
-### Име на сайта: MyCar
-### Описание на сайта:
-Сайта за обяви за автомобили. Позволява преглед на обяви, публикувани от всички потребители, търсене по марка или марка и модел, добавянето на избрани обяви в собствен списък с наблюдавани обяви, публикуване на обяви от потребителите, техния преглед, редактиране и изтриване. Освен обичайната изисквана информация за марка, модел, цена и т.н. има възможност за добавяне на до 5 снимки към всяка обява. Добавянето на снимки е чрез прикачване на файл, който се запазва във Firebase Storage (а не  чрез въвеждане на адрес, на който е съхранена снимката). В обявата се показва превю на всички прикачени снимки и при клик върху превюто, снимката се показва в по-голям формат.
-### Карта на сайта:
-За нелогнати потребители
+•	Sign in/Sign up pages
+Uses Firebase Authentication
 
-•	Начална (Home) страница
+### Registered users
 
-•	Регистрация
+•	List All Ads
+Show a list of all ads, ordered by posting date, with links to display their details.
 
-•	Вход
+•	Search
+When a user enters a search criteria, look in the database for partial matches and return a list of links to all ads, whose brand and model contains the input
 
-За логнати потребители
+•	Details
+Load the ad from the database and display a page, containing its details and photos. Ad owner has the options to edit or delete the article.
 
-•	Търсене (включва списък с всички публикувани обяви)
+•	Sell my car
+Form for publishing a new add. The user becomes owner for the ad and the posting date is set to the current time.
 
-•	Детайли (показва пълната информация за избрана обяви с възможност за преглед на всички снимки или изтриване на обявата от собственика и)
+•	Edit / Delete
+An ad can be edited or deleted by its owner.
 
-•	Продай (форма за добавяне на нова обява за продажба на автомобил)
+•	My watchlist
+Users can add or remove ads on their own watchlist to easily find and review user's favorite ads later.
 
-•	Редактирай (форма за редактиране на текста и снимките на избрана обява)
+•	My ads
+Displays all ads posted by the user.
 
-•	Моя списък за наблюдение (показва обяви, които потребителят e избрал да наблючдава)
+## Features used:
 
-•	Мои автомобили - показва публикуваните от потребителя обяви
+•	Firebase Authentication
 
-## Права за създаване/редактиране/изтриване:
-Всички потребители са с еднакъв статут и могат да създават обяви, да редактират/изтриват само собствените си обяви.
-Всички потребители могат да разглеждат всички обяви, да ги добавят в собствен списък с наблючдавани обяви или да премахват обяви от него. 
+•	NGBootstrap for UI including responsive design
 
-## Допълнителна информация:
+•	Firebase Storage for image storage
 
-•	автентикация чрез Firebase Authentication
+•	Page synchronization in realtime using subscription to Firebase Realtime Database
 
-•	използване на NGBootstrap за дизайн на потребителския интерфейс вкл. responsive design
+•	RxJS library operators (map, switchMap, combineLatest, finalize)
 
-•	използване на  Firebase Storage за съхраняване на файлове (снимки)  на потребителя
-
-•	актуализация на страниците чрез subscribe към заявки към realtime база данни (Firebase Database)
-
-•	използване на оператори от библиотеката RxJS за получаване на данни чрез комплексни асинхронни заявки(map, switchMap, combineLatest, finalize)
-
-•	споделяне на данни чрез Subject
+•	data sharing (multicasting) using Subject
